@@ -1,16 +1,22 @@
-## Hi there 👋
+# ¡Hola! 👋 Soy Hellen Ramírez
 
-<!--
-**Hellen-2025/Hellen-2025** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+🎓 Estudiante de **Desarrollo Web** apasionada por crear experiencias digitales interactivas y funcionales.
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### 🚀 Tecnologías y herramientas que estoy aprendiendo:
+- 🧱 **HTML5** | 🎨 **CSS** | ⚙️ **JavaScript**
+- 🌐 **Git** y **GitHub**
+- 💻 Fundamentos de **Frontend** y **Backend**
+- 🛠️ Prácticas con **Visual Studio Code**, **Git Bash**
+
+---
+![alt text]( icons8-github-144.png)
+
+
+> 💡 *"Cada línea de código es una oportunidad para aprender y mejorar."*
+
+---
+
+
+
