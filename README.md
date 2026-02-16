@@ -5,10 +5,11 @@
 ---
 
 ### 🚀 Tecnologías y herramientas que estoy aprendiendo:
-- 🧱 **HTML5** | 🎨 **CSS** | ⚙️ **JavaScript**
+- 🧱 **HTML5** | 🎨 **CSS** | ⚙️ **JavaScript** | ⚙️ **C#**| ⚙️ **Unity**
 - 🌐 **Git** y **GitHub**
 - 💻 Fundamentos de **Frontend** y **Backend**
 - 🛠️ Prácticas con **Visual Studio Code**, **Git Bash**
+- 
 
 ---
 ![alt text]( icons8-github-144.png)
