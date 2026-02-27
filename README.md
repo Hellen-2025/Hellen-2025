@@ -4,11 +4,12 @@
 
 ---
 
-### 🚀 Tecnologías y herramientas que estoy aprendiendo:
-- 🧱 **HTML5** | 🎨 **CSS** | ⚙️ **JavaScript** | ⚙️ **C#**| ⚙️ **Unity**
+### 🚀 Game Development:
+- 🧱 | ⚙️ **Unity**|**Lógica de programación Programming C#**
+ | 🎨 **CSS** | ⚙️ **JavaScript** | 
 - 🌐 **Git** y **GitHub**
 - 💻 Fundamentos de **Frontend** y **Backend**
-- 🛠️ Prácticas con **Visual Studio Code**, **Git Bash**
+- 🛠️ Tools **Visual Studio Code**, **Git Bash**
 - 
 
 ---
