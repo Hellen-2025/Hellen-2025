@@ -1,6 +1,6 @@
 # ¡Hola! 👋 Soy Hellen Ramírez
 
-🎓 **Unity Developer Junior** apasionada por crear experiencias digitales interactivas y funcionales.
+🎓 **Unity Developer ** apasionada por crear experiencias digitales interactivas y funcionales.
 
 ---
 
