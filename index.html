@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hellen Ramírez - Unity Developer</title>
+    <title>Hellen Ramírez - Unity Developer | Portafolio Profesional</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome para iconos profesionales -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         /* ===== VARIABLES GLOBALES ===== */
         :root {
@@ -15,9 +17,16 @@
             --primary-dark: #5649c0;
             --secondary: #00cec9;
             --dark-bg: #0a0c0f;
+            --success: #00b894;
+            --warning: #fdcb6e;
         }
         
-        /* ===== FONDO TEMÁTICO DE VIDEOJUEGOS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Segoe UI', 'Press Start 2P', system-ui, sans-serif;
             background: linear-gradient(135deg, #0a0c0f 0%, #1a1e2a 100%);
@@ -26,7 +35,7 @@
             color: #e0e0e0;
         }
         
-        /* Efecto de píxeles y líneas de escaneo (estilo retro gaming) */
+        /* Efecto de fondo */
         body::before {
             content: "";
             position: fixed;
@@ -35,28 +44,13 @@
             width: 100%;
             height: 100%;
             background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0, 255, 255, 0.03) 0px,
-                    rgba(255, 0, 255, 0.03) 1px,
-                    transparent 1px,
-                    transparent 3px
-                ),
-                radial-gradient(
-                    circle at 20% 30%,
-                    rgba(108, 92, 231, 0.1) 0%,
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 80% 70%,
-                    rgba(0, 206, 201, 0.1) 0%,
-                    transparent 30%
-                );
+                repeating-linear-gradient(0deg, rgba(0, 255, 255, 0.03) 0px, rgba(255, 0, 255, 0.03) 1px, transparent 1px, transparent 3px),
+                radial-gradient(circle at 20% 30%, rgba(108, 92, 231, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(0, 206, 201, 0.1) 0%, transparent 30%);
             pointer-events: none;
             z-index: 0;
         }
         
-        /* "Píxeles" flotantes animados */
         body::after {
             content: "";
             position: fixed;
@@ -64,14 +58,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                repeating-linear-gradient(
-                    45deg,
-                    rgba(255, 255, 255, 0.02) 0px,
-                    rgba(255, 255, 255, 0.02) 2px,
-                    transparent 2px,
-                    transparent 10px
-                );
+            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 2px, transparent 2px, transparent 10px);
             animation: scanline 10s linear infinite;
             pointer-events: none;
             z-index: 0;
@@ -82,22 +69,12 @@
             100% { background-position: 0 100px; }
         }
         
-        /* Contenedor principal para que el contenido esté sobre el fondo */
-        .container {
-            position: relative;
-            z-index: 1;
-        }
+        .container { position: relative; z-index: 1; }
         
-        /* ===== ANIMACIONES ===== */
+        /* Animaciones */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @keyframes glowPulse {
@@ -106,15 +83,21 @@
             100% { box-shadow: 0 0 5px rgba(108, 92, 231, 0.5); }
         }
         
-        /* ===== NAVBAR ===== */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Navbar */
         .navbar {
-            background: rgba(10, 12, 15, 0.9) !important;
+            background: rgba(10, 12, 15, 0.95) !important;
             backdrop-filter: blur(10px);
             border-bottom: 2px solid rgba(108, 92, 231, 0.5);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             padding: 1rem 0;
-            position: relative;
-            z-index: 2;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
         .navbar-brand {
@@ -124,18 +107,15 @@
             text-shadow: 0 0 10px var(--primary);
         }
         
-        .navbar-brand span {
-            color: var(--secondary);
-        }
+        .navbar-brand span { color: var(--secondary); }
         
-        /* ===== PRESENTACIÓN ===== */
+        /* Presentación */
         .presentacion {
             background: rgba(20, 25, 35, 0.8);
             backdrop-filter: blur(10px);
             border-radius: 1.5rem;
             padding: 2.5rem;
             border: 2px solid rgba(108, 92, 231, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             animation: glowPulse 3s infinite;
         }
         
@@ -145,20 +125,127 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 800;
-            text-shadow: 0 0 30px rgba(108, 92, 231, 0.5);
         }
         
         .badge {
             padding: 0.5rem 1rem;
             margin: 0.25rem;
             background: rgba(108, 92, 231, 0.2) !important;
-            color: #fff !important;
             border: 1px solid rgba(108, 92, 231, 0.5);
-            font-weight: 500;
-            backdrop-filter: blur(5px);
         }
         
-        /* ===== TARJETAS DE JUEGOS (COLORES PERSONALIZADOS) ===== */
+        /* ===== NUEVA SECCIÓN: TECNOLOGÍAS ===== */
+        .tech-stack {
+            background: rgba(20, 25, 35, 0.6);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tech-badge {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.2), rgba(0, 206, 201, 0.2));
+            border: 1px solid var(--primary);
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tech-badge:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.4), rgba(0, 206, 201, 0.4));
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        /* ===== SECCIÓN: ESTADÍSTICAS ===== */
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(30, 35, 45, 0.8);
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            min-width: 150px;
+            border: 1px solid rgba(108, 92, 231, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+        }
+        
+        /* ===== SECCIÓN: EN DESARROLLO ===== */
+        .development-card {
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(0, 206, 201, 0.1));
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px dashed var(--primary);
+        }
+        
+        .progress {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            height: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 1rem;
+            transition: width 0.5s ease;
+        }
+        
+        /* ===== SECCIÓN: CERTIFICACIONES ===== */
+        .certifications {
+            background: rgba(20, 25, 35, 0.6);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .cert-item:hover {
+            background: rgba(108, 92, 231, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .cert-icon {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+        
+        /* ===== TARJETAS DE JUEGOS ===== */
         .card {
             border-radius: 1.5rem;
             background: rgba(30, 35, 45, 0.9);
@@ -168,8 +255,15 @@
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             overflow: hidden;
-            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
+        
+        .card:nth-child(1) { --card-color: #6c5ce7; animation-delay: 0.1s; }
+        .card:nth-child(2) { --card-color: #fd79a8; animation-delay: 0.2s; }
+        .card:nth-child(3) { --card-color: #00cec9; animation-delay: 0.3s; }
+        .card:nth-child(4) { --card-color: #fdcb6e; animation-delay: 0.4s; }
         
         .card::before {
             content: "";
@@ -188,74 +282,77 @@
             pointer-events: none;
         }
         
-        /* Colores específicos para cada juego */
-        .card:nth-child(1) { --card-color: #6c5ce7; } /* Floating Island - Púrpura */
-        .card:nth-child(2) { --card-color: #fd79a8; } /* Ball Hound - Rosa */
-        .card:nth-child(3) { --card-color: #00cec9; } /* Balloon Challenge - Turquesa */
-        .card:nth-child(4) { --card-color: #fdcb6e; } /* Farmer - Dorado */
-        
         .card:hover {
             transform: translateY(-12px) scale(1.02);
             box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.8);
             border-color: var(--card-color);
         }
         
-        .card-img-top {
-            height: 200px;
+        /* Estilos para imágenes y videos en tarjetas */
+        .card-img-top, .card-video-top {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
             object-fit: cover;
-            transition: transform 0.6s ease;
-            opacity: 0.9;
+            object-position: center;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0.85;
+            filter: brightness(0.95);
+            flex-shrink: 0;
         }
         
-        .card:hover .card-img-top {
-            transform: scale(1.1);
+        .card-video-top {
+            background: #000;
+        }
+        
+        .card:hover .card-img-top,
+        .card:hover .card-video-top {
+            transform: scale(1.12);
             opacity: 1;
+            filter: brightness(1.08);
         }
         
-        .card-title {
-            color: #fff;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            text-shadow: 0 0 10px var(--card-color);
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(108, 92, 231, 0) 0%, rgba(108, 92, 231, 0.25) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 1;
         }
         
-        .card-text {
-            color: #b0b0b0;
-            line-height: 1.6;
+        .card:hover::after { opacity: 1; }
+        
+        .card-body { flex: 1 1 auto; padding: 1.5rem; position: relative; z-index: 2; }
+        .card-title { color: #fff; font-weight: 700; text-shadow: 0 0 10px var(--card-color); }
+        .card-text { color: #b0b0b0; line-height: 1.6; font-size: 0.95rem; }
+        .card-text b { color: var(--secondary); }
+        .card-footer { background: transparent; border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 1.25rem; flex-shrink: 0; z-index: 2; }
+        
+        /* Badge de contribución */
+        .contribution-badge {
+            display: inline-block;
+            background: rgba(0, 206, 201, 0.2);
+            border: 1px solid var(--secondary);
+            border-radius: 1rem;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
         }
         
-        .card-footer {
-            background: transparent;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.25rem;
-        }
-        
-        /* ===== BOTONES ===== */
+        /* Botones */
         .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             border: none;
             padding: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
             border-radius: 2rem;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
             transition: all 0.3s ease;
-        }
-        
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-            z-index: -1;
         }
         
         .btn-primary:hover {
@@ -263,12 +360,7 @@
             box-shadow: 0 10px 20px -5px var(--primary);
         }
         
-        .btn-primary:hover::after {
-            width: 400px;
-            height: 400px;
-        }
-        
-        /* ===== SECCIÓN CV Y LINKEDIN ===== */
+        /* Sección profesional */
         .professional-section {
             background: rgba(20, 25, 35, 0.8);
             backdrop-filter: blur(10px);
@@ -276,14 +368,6 @@
             padding: 3rem;
             border: 2px solid rgba(108, 92, 231, 0.3);
             margin: 4rem 0;
-            text-align: center;
-        }
-        
-        .professional-section h2 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 20px var(--primary);
         }
         
         .professional-links {
@@ -299,149 +383,142 @@
             border-radius: 1.5rem;
             width: 250px;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            cursor: pointer;
+            text-align: center;
         }
         
-        .professional-card.linkedin {
-            border-color: #0077b5;
-            box-shadow: 0 0 30px rgba(0, 119, 181, 0.3);
-        }
+        .professional-card.linkedin { border-color: #0077b5; box-shadow: 0 0 30px rgba(0, 119, 181, 0.3); }
+        .professional-card.cv { border-color: var(--primary); box-shadow: 0 0 30px rgba(108, 92, 231, 0.3); }
+        .professional-card:hover { transform: translateY(-10px); }
         
-        .professional-card.linkedin:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 119, 181, 0.4);
-        }
+        .professional-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .professional-card.linkedin .professional-icon { color: #0077b5; }
+        .professional-card.cv .professional-icon { color: var(--primary); }
         
-        .professional-card.cv {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
-        }
-        
-        .professional-card.cv:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.4);
-        }
-        
-        .professional-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-        
-        .professional-card.linkedin .professional-icon {
-            color: #0077b5;
-        }
-        
-        .professional-card.cv .professional-icon {
-            color: var(--primary);
-        }
-        
-        .professional-card h3 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .professional-card .btn-outline {
+        .btn-outline {
             background: transparent;
             border: 2px solid currentColor;
-            color: inherit;
             padding: 0.5rem 1.5rem;
             border-radius: 2rem;
             font-weight: 600;
-            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
         }
         
-        .professional-card.linkedin .btn-outline {
-            color: #0077b5;
-        }
+        .professional-card.linkedin .btn-outline { color: #0077b5; }
+        .professional-card.cv .btn-outline { color: var(--primary); }
+        .professional-card .btn-outline:hover { background: currentColor; color: #1a1e2a; }
         
-        .professional-card.cv .btn-outline {
-            color: var(--primary);
-        }
-        
-        .professional-card .btn-outline:hover {
-            background: currentColor;
-            color: #1a1e2a;
-        }
-        
-        /* ===== FOOTER ===== */
+        /* Footer */
         footer {
-            background: rgba(10, 12, 15, 0.9) !important;
-            backdrop-filter: blur(10px);
-            color: white !important;
+            background: rgba(10, 12, 15, 0.9);
             padding: 2rem 0;
             margin-top: 4rem;
             border-radius: 2rem 2rem 0 0;
             border-top: 2px solid rgba(108, 92, 231, 0.5);
-            position: relative;
-            z-index: 2;
         }
         
-        footer a {
-            color: var(--secondary) !important;
-            text-decoration: none;
+        footer a { color: var(--secondary) !important; text-decoration: none; transition: all 0.3s ease; }
+        footer a:hover { color: #fff !important; text-shadow: 0 0 10px var(--secondary); }
+        
+        /* Filtros */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-btn {
+            background: rgba(30, 35, 45, 0.8);
+            border: 1px solid rgba(108, 92, 231, 0.5);
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
+            color: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Control de video */
+        .video-controls {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            z-index: 10;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        footer a:hover {
-            color: #fff !important;
-            text-shadow: 0 0 10px var(--secondary);
+        .video-controls:hover {
+            background: var(--primary);
+            transform: scale(1.1);
         }
         
-        /* ===== SCROLL SUAVE ===== */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* ===== RESPONSIVE ===== */
+        /* Responsive */
         @media (max-width: 768px) {
-            .professional-links {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .professional-card {
-                width: 100%;
-                max-width: 300px;
-            }
+            .professional-links { flex-direction: column; align-items: center; }
+            .professional-card { width: 100%; max-width: 300px; }
+            .card-img-top, .card-video-top { height: 180px; }
+            .stats-grid { gap: 1rem; }
+            .stat-card { min-width: 120px; }
         }
+        
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <span>✨</span> Hellen-2025 <span>🎮</span>
-            </a>
+            <a class="navbar-brand" href="#">✨ Hellen-2026 <span>🎮</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/Hellen-2025/Hellen-2025" target="_blank">
-                            <i class="fab fa-github"></i> Mi Repo
-                        </a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="https://github.com/Hellen-2025" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://hellen2025.itch.io/" target="_blank"><i class="fab fa-itch-io"></i> Itch.io</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/hellen-ramirez-goez/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Contenido principal -->
     <main class="container my-5">
-        <!-- Sección Presentación -->
+        <!-- Presentación -->
         <section class="row mb-5">
             <div class="col-lg-10 mx-auto">
                 <div class="presentacion text-center">
                     <h1 class="display-4 fw-bold">¡Hola! 👋 Soy Hellen Ramírez</h1>
                     <p class="lead fs-3 mb-4">🎮 <strong>Unity Developer</strong> creando mundos interactivos</p>
-                    <hr class="my-4 w-25 mx-auto" style="border-color: var(--primary); opacity: 0.5;">
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Juegos Publicados</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">Proyectos Colaborativos</div>
+                        </div>
+                             <div class="stat-card">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">Game Jams</div>
+                        </div>
+                    </div>
+                    
                     <div class="my-4">
                         <span class="badge"><i class="fab fa-unity"></i> Unity</span>
                         <span class="badge"><i class="fas fa-code"></i> C#</span>
@@ -449,78 +526,102 @@
                         <span class="badge"><i class="fab fa-js"></i> JavaScript</span>
                         <span class="badge"><i class="fab fa-git-alt"></i> Git/GitHub</span>
                     </div>
-                    <p class="fst-italic fs-5" style="color: var(--secondary);">
+                    
+                    <div class="tech-stack">
+                        <h5 class="mb-3"><i class="fas fa-cogs me-2"></i> Tecnologías que domino</h5>
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <span class="tech-badge"><i class="fab fa-unity"></i> Unity 2022 LTS</span>
+                            <span class="tech-badge"><i class="fas fa-code"></i> C# .NET</span>
+                            <span class="tech-badge"><i class="fab fa-git-alt"></i> Git & GitHub</span>
+                            <span class="tech-badge"><i class="fas fa-mobile-alt"></i> Unity UI (uGUI)</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="development-card">
+                        <h5><i class="fas fa-hammer me-2"></i> 🔨 Actualmente trabajando en:</h5>
+                        <p class="mb-2">En una Game Jam</p>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 15%">15% completado</div>
+                        </div>
+                        <p class="small text-muted mt-2">Próximo lanzamiento: Mayo 2026</p>
+                    </div>
+                    
+                    <p class="fst-italic fs-5 mt-3" style="color: var(--secondary);">
                         "Cada línea de código es una oportunidad para aprender y mejorar."
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Título juegos -->
-        <h2 class="text-center mb-5 display-5 fw-bold" style="color: #fff; text-shadow: 0 0 20px var(--primary);">
-            <i class="fas fa-gamepad me-2"></i> Mis Creaciones en Itch.io
+        <!-- Filtros de juegos -->
+        <h2 class="text-center mb-4 display-5 fw-bold" style="color: #fff; text-shadow: 0 0 20px var(--primary);">
+            <i class="fas fa-gamepad me-2"></i> Mis Creaciones
         </h2>
-
-        <div class="row g-4">
-           
-       <div class="col-md-6 col-lg-6">
-    <div class="card h-100">
-        <img src="imagenes/what da  fuq.png" class="card-img-top" alt="What da fuq is wrong with my gun">
         
-        <div class="card-body">
-            <h5 class="card-title">
-                What da fuq is wrong with my gun 
-                <span class="badge bg-warning text-dark">NUEVO</span>
-            </h5>
-
-           <p class="card-text">
-                <b>Cómo jugar</b><br>
-                ⬅️ ➡️ A / D: Movimiento lateral<br>
-                ⬆️ Espacio: Saltar<br>
-                👊 Clic izquierdo: Golpe cuerpo a cuerpo<br>
-                🎯 Clic derecho: Apuntar arma<br>
-                🕹️ Clic izquierdo + clic derecho: Disparar<br><br>
-                💥Sobrevive evitando a los enemigos y usa el entorno a tu favor. <br><br>
-                🛠️ <b>Mi participación:</b><br>
-                - Programación de IA de enemigos (Zombie AI)<br>
-                - Sistema de eventos<br>
-                - Sistema de spawn de enemigos<br><br>
-                
-                🛠️<b>Aporte Clave:</b> <br>
-                 Diseñé e implementé el comportamiento de los enemigos para que reaccionaran al jugador, contribuyendo a la dificultad y dinámica del juego. Además, apoyé en la lógica general que permite que el entorno influya en la supervivencia del jugador.
-            </p>
-        </div>  
-
-        <div class="card-footer">
-            <a href="https://alahros.itch.io/what-dafuq-is-wrong-with-my-gun" class="btn btn-primary w-100" target="_blank">
-                <i class="fas fa-play me-2"></i> Jugar en Itch.io
-            </a>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="2d">3D/2D Platformer</button>
+            <button class="filter-btn" data-filter="3d">Shooter</button>
+            <button class="filter-btn" data-filter="puzzle">Arcade/Puzzle</button>
         </div>
 
-    </div>
-</div>
-
+        <div class="row g-4" id="gamesContainer">
+            <!-- Juego 1: What da fuq - CON VIDEO CORREGIDO -->
+            <div class="col-md-6 col-lg-6 game-card" data-category="3d">
+                <div class="card h-100">
+                    <div style="position: relative;">
+                        <video id="whatDaFuqVideo" class="card-video-top" muted loop playsinline>
+                            <!-- CAMBIA ESTA RUTA por un nombre SIN ESPACIOS ni caracteres especiales -->
+                            <source src="videos/What da'fuq is wrong with my gun by Alahros, HOLMES HARVEY GARCES LOPEZ, David Patiño Pato, Hellen2025 y 3 páginas más - Personal_ Microsoft​ Edge 2026-04-08 20-14-40.mp4" type="video/mp4">
+                            Tu navegador no soporta videos.
+                        </video>
+                        <div class="video-controls" id="whatDaFuqControl">
+                            <i class="fas fa-play" id="whatDaFuqIcon"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">What da fuq is wrong with my gun <span class="badge bg-warning text-dark">NUEVO</span></h5>
+                        <span class="contribution-badge"><i class="fas fa-robot"></i> IA Implementation</span>
+                        <p class="card-text mt-2">
+                            <b>🎮 Cómo jugar</b><br>
+                            ⬅️ ➡️ A/D: Movimiento | ⬆️ Espacio: Saltar | 👊 Clic izq: Golpe | 🎯 Clic der: Apuntar<br><br>
+                            💥 Sobrevive evitando a los enemigos y usa el entorno a tu favor.<br><br>
+                            🛠️ <b>Mi participación:</b> Programación de IA de enemigos, Sistema de eventos, Spawn de enemigos<br><br>
+                            🏆 <b>Aporte Clave:</b> Diseñé el comportamiento de los enemigos para que reaccionaran al jugador.
+                        </p>
+                    </div>  
+                    <div class="card-footer">
+                        <a href="https://alahros.itch.io/what-dafuq-is-wrong-with-my-gun" class="btn btn-primary w-100" target="_blank">
+                            <i class="fas fa-play me-2"></i> Jugar en Itch.io
+                        </a>
+                    </div>
+                </div>
+            </div>
         
-                 
-        <div class="col-md-6 col-lg-6">
-            <div class="card h-100">
-                    <img src="imagenes/legacy.png" class="card-img-top" alt="Hidden Legacy">
+            <!-- Juego 2: Hidden Legacy - CON VIDEO MP4 (empieza en segundo 33) -->
+            <div class="col-md-6 col-lg-6 game-card" data-category="2d">
+                <div class="card h-100">
+                    <div style="position: relative;">
+                        <video id="legacyVideo" class="card-video-top" muted loop playsinline>
+                            <!-- CAMBIA ESTA RUTA por un nombre SIN ESPACIOS -->
+                            <source src="videos/HIDDEN LEGACY by Andrea Granados, Dallimacma, Hellen2025, Builasio - Google Chrome 2026-04-08 19-31-15.mp4" type="video/mp4">
+                            Tu navegador no soporta videos.
+                        </video>
+                        <div class="video-controls" id="videoControlBtn">
+                            <i class="fas fa-play" id="playPauseIcon"></i>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Hidden Legacy <span class="badge bg-warning text-dark">NUEVO</span></h5>
-                        <p class="card-text">
-                        <b>Cómo jugar</b><br>
-                        ⬅️ ➡️ ⬆️ ⬇️ Flechas: mover personaje<br>
-                        🏃 Shift: correr<br>
-                        ⬆️ Espacio: saltar<br>
-                        🖱️ Mouse: mover la cámara<br><br>
-                        💥 Debes llegar al centro del laberinto y encontrar el tesoro. <br> <br>
-                        🛠️ <b>Mi participación:</b><br>
-                        Desarrollo de la lógica principal del juego
-                        Implementación de mecánicas de movimiento y exploración en el laberinto<br><br>
-                        
-                        🛠️ <b>Aporte clave:</b><br>
-                         Contribuí al desarrollo de la jugabilidad centrada en la exploración, asegurando una experiencia fluida en la navegación del entorno y la interacción del jugador.
-                    </p>                 
+                        <span class="contribution-badge"><i class="fas fa-map"></i> Level Design</span>
+                        <p class="card-text mt-2">
+                            <b>🎮 Cómo jugar</b><br>
+                            ⬅️ ➡️ ⬆️ ⬇️ Flechas: Movimiento | 🏃 Shift: Correr | 🖱️ Mouse: Cámara<br><br>
+                            💥 Debes llegar al centro del laberinto y encontrar el tesoro.<br><br>
+                            🛠️ <b>Mi participación:</b> Lógica principal, mecánicas de movimiento y exploración<br><br>
+                            🏆 <b>Aporte Clave:</b> Experiencia fluida en navegación del entorno.
+                        </p>                 
                     </div>  
                     <div class="card-footer">
                         <a href="https://andreagranados.itch.io/hidden-legacy" class="btn btn-primary w-100" target="_blank">
@@ -530,51 +631,42 @@
                 </div>
             </div>
             
-            <!-- Juego 2: Ball Hound (4 días) -->
-        <div class="col-md-6 col-lg-6">
+            <!-- Juego 3: Whack-a-Food -->
+            <div class="col-md-6 col-lg-6 game-card" data-category="puzzle">
                 <div class="card h-100">
-                    <img src="imagenes/comida.png" class="card-img-top" alt="Ball Hound">
+                    <img src="imagenes/comida.png" class="card-img-top" alt="Whack-a-Food">
                     <div class="card-body">
-                    <h5 class="card-title">Whack -a- Food <span class="badge bg-warning text-dark">NUEVO</span></h5>
-                        <p class="card-text"> <b>Cómo jugar</b>
-                                                <br>
-                                 Elige dificultad: Fácil (lento), Medio (normal) o Difícil (rápido)<br> 
-                                💥Haz CLIC en la comida para ganar puntos. <br>    
-                                🛠️ <b>Mi participación:</b><br>
-                                -Desarrollo completo del juego (lógica, mecánicas y sistema de puntuación)<br><br> 
-                                 🛠️ <b>Aporte clave:</b><br>     
-                            Diseñé e implementé la mecánica principal del juego basada en reflejos, optimizando la respuesta del jugador y la progresión de dificultad.        
+                        <h5 class="card-title">Whack-a-Food <span class="badge bg-warning text-dark">NUEVO</span></h5>
+                        <span class="contribution-badge"><i class="fas fa-tachometer-alt"></i> Full Development</span>
+                        <p class="card-text mt-2">
+                            <b>🎮 Cómo jugar</b><br>
+                            Elige dificultad: Fácil (lento), Medio (normal) o Difícil (rápido)<br>
+                            💥 Haz CLIC en la comida para ganar puntos.<br><br>
+                            🛠️ <b>Mi participación:</b> Desarrollo completo del juego<br><br>
+                            🏆 <b>Aporte Clave:</b> Mecánica basada en reflejos con progresión de dificultad.
+                        </p>
                     </div>  
                     <div class="card-footer">
                         <a href="https://hellen2025.itch.io/w" class="btn btn-primary w-100" target="_blank">
                             <i class="fas fa-play me-2"></i> Jugar en Itch.io
                         </a>
                     </div>   
-                   
                 </div>
             </div>
             
-            <!-- Juego 3: Balloon Challenge (4 días) -->
-            
-            
             <!-- Juego 4: Farmer -->
-        <div class="col-md-6 col-lg-6">
-            <div class="card h-100">
-                <img src="imagenes/farmer.jpg" class="card-img-top" alt="Farmer">
+            <div class="col-md-6 col-lg-6 game-card" data-category="2d">
+                <div class="card h-100">
+                    <img src="imagenes/farmer.jpg" class="card-img-top" alt="Farmer">
                     <div class="card-body">
                         <h5 class="card-title">Farmer</h5>
-                        <p class="card-text">
-                                <b>🌾 Cómo jugar</b><br>
-                                ⬆️ Espacio: saltar<br>
-                                💥Evita los obstáculos y avanza lo máximo posible<br><br>
-
-                                
-                                 🛠️ <b>Mi participación:</b><br>
-                                    - Implementación de mecánicas de movimiento y obstáculos
-                                    Desarrollo de la lógica de progresión del jugador<br><br> 
-                                🛠️ <b>Aporte clave:</b><br>     
-                                    -Desarrollé un sistema de juego enfocado en la evasión de obstáculos, mejorando la experiencia del jugador a través de una jugabilidad simple pero dinámica. 
-                            </p>
+                        <span class="contribution-badge"><i class="fas fa-running"></i> Game Mechanics</span>
+                        <p class="card-text mt-2">
+                            <b>🌾 Cómo jugar</b><br>
+                            ⬆️ Espacio: Saltar | 💥 Evita los obstáculos y avanza lo máximo posible<br><br>
+                            🛠️ <b>Mi participación:</b> Mecánicas de movimiento, obstáculos y progresión<br><br>
+                            🏆 <b>Aporte Clave:</b> Jugabilidad simple pero dinámica enfocada en evasión.
+                        </p>
                     </div>
                     <div class="card-footer">
                         <a href="https://hellen2025.itch.io/farmer" class="btn btn-primary w-100" target="_blank">
@@ -585,7 +677,25 @@
             </div>
         </div>
 
-        <!-- NUEVA SECCIÓN: CV Y LINKEDIN -->
+        <!-- Certificaciones -->
+        <div class="certifications">
+            <h4 class="mb-3"><i class="fas fa-certificate me-2" style="color: var(--secondary);"></i> 📚 Formación y Certificaciones</h4>
+            <div class="cert-item">
+                <div class="cert-icon"><i class="fab fa-unity"></i></div>
+                <div><strong>Unity Essentials</strong> - Unity Learn (2024)</div>
+            </div>
+            <div class="cert-item">
+                <div class="cert-icon"><i class="fas fa-code"></i></div>
+                <div><strong>Programación en C# para Videojuegos</strong> - Generation (2026)</div>
+            </div>
+            <div class="cert-item">
+                <div class="cert-icon"><i class="fas fa-trophy"></i></div>
+                <div><strong>Global Game Jam 2026</strong> - Participante </div>
+            </div>
+           
+        </div>
+
+        <!-- Sección CV y LinkedIn -->
         <section class="professional-section">
             <h2><i class="fas fa-user-tie me-3"></i> Sobre Mí Profesionalmente</h2>
             <p class="fs-5 mb-5" style="color: #b0b0b0; max-width: 700px; margin-left: auto; margin-right: auto;">
@@ -594,35 +704,35 @@
             </p>
             
             <div class="professional-links">
-                <!-- Tarjeta de LinkedIn -->
                 <div class="professional-card linkedin">
-                    <div class="professional-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
+                    <div class="professional-icon"><i class="fab fa-linkedin"></i></div>
                     <h3>LinkedIn</h3>
                     <p class="text-muted mb-3">Conecta profesionalmente</p>
-                    <!-- IMPORTANTE:  con tu URL de LinkedIn -->
                     <a href="https://www.linkedin.com/in/hellen-ramirez-goez/" target="_blank" class="btn-outline">
                         <i class="fab fa-linkedin me-2"></i> Visitar Perfil
                     </a>
                 </div>
                 
-                <!-- Tarjeta de CV -->
                 <div class="professional-card cv">
-                    <div class="professional-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
+                    <div class="professional-icon"><i class="fas fa-file-pdf"></i></div>
                     <h3>Mi CV</h3>
                     <p class="text-muted mb-3">Experiencia y habilidades</p>
-                    <!-- IMPORTANTE: Reemplaza '#' con el enlace a tu CV (puedes subir un PDF al repo) -->
-                       <a href="imagenes/cVHellenRamirez.pdf" class="btn-outline">
-
+                    <a href="imagenes/cVHellenRamirez.pdf" class="btn-outline">
                         <i class="fas fa-download me-2"></i> Descargar PDF
                     </a>
                 </div>
             </div>
             
-            <div class="mt-5 text-muted">
+            <div class="mt-4">
+                <p class="small text-muted">
+                    <i class="fas fa-envelope me-2"></i> hellen.ramirez@example.com
+                </p>
+                <p class="small text-muted">
+                    <i class="fas fa-map-marker-alt me-2"></i> Disponible para remoto
+                </p>
+            </div>
+            
+            <div class="mt-4 text-muted">
                 <p class="small">
                     <i class="fas fa-info-circle me-2"></i>
                     Disponible para oportunidades laborales y colaboraciones
@@ -631,7 +741,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="text-center">
         <div class="container">
             <p class="mb-3 fs-5">
@@ -640,16 +749,9 @@
                 <i class="fas fa-star ms-2" style="color: var(--secondary);"></i>
             </p>
             <div class="d-flex justify-content-center gap-4 mb-3">
-                <a href="https://github.com/Hellen-2025" target="_blank">
-                    <i class="fab fa-github fa-lg me-1"></i> GitHub
-                </a>
-                <a href="https://hellen2025.itch.io/" target="_blank">
-                    <i class="fab fa-itch-io fa-lg me-1"></i> Itch.io
-                </a>
-                <!-- Añade LinkedIn  -->
-                <a href="https://www.linkedin.com/in/hellen-ramirez-goez/" target="_blank">
-                    <i class="fab fa-linkedin fa-lg me-1"></i> LinkedIn
-                </a>
+                <a href="https://github.com/Hellen-2025" target="_blank"><i class="fab fa-github fa-lg me-1"></i> GitHub</a>
+                <a href="https://hellen2025.itch.io/" target="_blank"><i class="fab fa-itch-io fa-lg me-1"></i> Itch.io</a>
+                <a href="https://www.linkedin.com/in/hellen-ramirez-goez/" target="_blank"><i class="fab fa-linkedin fa-lg me-1"></i> LinkedIn</a>
             </div>
             <p class="small opacity-75">
                 <i class="far fa-copyright me-1"></i> 2026 Hellen Ramírez - Unity Developer Junior
@@ -657,7 +759,84 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para los videos y filtros -->
+    <script>
+        // ===== CONTROL DEL VIDEO DE WHAT DA FUQ =====
+        const videoWDF = document.getElementById('whatDaFuqVideo');
+        const controlWDF = document.getElementById('whatDaFuqControl');
+        const iconWDF = document.getElementById('whatDaFuqIcon');
+        
+        if (videoWDF) {
+            // Control de play/pause
+            controlWDF.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (videoWDF.paused) {
+                    videoWDF.play();
+                    iconWDF.className = 'fas fa-pause';
+                } else {
+                    videoWDF.pause();
+                    iconWDF.className = 'fas fa-play';
+                }
+            });
+            
+            // Cuando el video termina, reinicia el ícono
+            videoWDF.addEventListener('ended', function() {
+                iconWDF.className = 'fas fa-play';
+            });
+        }
+        
+        // ===== CONTROL DEL VIDEO DE LEGACY =====
+        const video = document.getElementById('legacyVideo');
+        const controlBtn = document.getElementById('videoControlBtn');
+        const playPauseIcon = document.getElementById('playPauseIcon');
+        
+        if (video) {
+            // Configurar el video para que empiece en el segundo 33
+            video.currentTime = 33;
+            
+            // Cuando el video termina, vuelve al segundo 33 y pausa
+            video.addEventListener('ended', function() {
+                video.currentTime = 33;
+                video.pause();
+                playPauseIcon.className = 'fas fa-play';
+            });
+            
+            // Control de play/pause
+            controlBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (video.paused) {
+                    video.play();
+                    playPauseIcon.className = 'fas fa-pause';
+                } else {
+                    video.pause();
+                    playPauseIcon.className = 'fas fa-play';
+                }
+            });
+        }
+        
+        // ===== FILTROS DE JUEGOS =====
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const gameCards = document.querySelectorAll('.game-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                gameCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                        card.style.animation = 'fadeInUp 0.5s ease-out forwards';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
